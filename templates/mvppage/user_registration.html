@@ -1,0 +1,191 @@
+{% extends "mvppage/base.html" %}
+{% load staticfiles %}
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+<div class="section"></div>
+  <main>
+    <center>
+      <img class="responsive-img" style="width: 250px;" src="{% static 'mvppage/images/logo.png' %}" alt="eKnous Technology SOlutions Logo"/>
+      <div class="section"></div>
+
+      <h5 class="black-text">Please, SignUp into your account</h5>
+      <div class="section"></div>
+
+
+
+      {% if messages %} {{ message }}
+      <ul class="messages">
+          {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                  {% endfor %}
+          
+      </ul>
+      {% endif %}
+      
+
+
+
+
+      <div class="container">
+        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+          <form class="col s12" method="POST" action="">{% csrf_token %}
+            <div class='row'>
+              <div class='col s12'>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='input-field col s4'>
+                <input type='text' name='username' autofocus required id='id_username' maxlength="150"/>
+                <label for='id_username'>User Name</label>
+              </div>
+           
+                <div class='input-field col s4'>
+                  <input type='email' name='email' autofocus required id='id_email' maxlength="254"/>
+                  <label for='id_email'>Email</label>
+                </div>
+
+                <div class='input-field col s4'>
+                    <input type='password' name='password' autofocus required id='id_password' />
+                    <label for='id_password'>Password</label>
+                  </div>
+
+              </div>
+
+
+              <div class='row'>
+                <div class='input-field col s4'>
+                  <input type='password' name='confirm_password' autofocus required id='id_confirm_password' />
+                  <label for='id_confirm_password'>Conform Password</label>
+                </div>
+             
+                  <div class='input-field col s4'>
+                    <input type='text' name='recycler_name' autofocus required id='id_recycler_name' maxlength="150"/>
+                    <label for='id_recycler_name'>Company Name</label>
+                  </div>
+  
+                  <div class='input-field col s4'>
+                      <input type='text' name='recycler_address1' autofocus required id='id_recycler_address1' maxlength="254"/>
+                      <label for='id_recycler_address1'>Address1</label>
+                    </div>
+  
+                </div>
+
+                <div class='row'>
+                    <div class='input-field col s4'>
+                      <input type='text' name='recycler_address2' autofocus required id='id_recycler_address2' maxlength="150"/>
+                      <label for='id_recycler_address2'>Address2</label>
+                    </div>
+
+                    <div class="input-field col s4">
+                        <p>
+                            <label for="id_recycler_city">City:</label>
+                            <select style="display:block" name="recycler_city" required id="id_recycler_city">
+                                <option value="" selected disabled hidden></option>
+                                {% for citys in city %}
+                                <option value={{citys.city_id}}>{{citys.city_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                    </div>
+
+                    <div class="input-field col s4">
+                        <p>
+                            <label for="id_recycler_zip">Zip:</label>
+                            <select style="display:block" name="recycler_zip" required id="id_recycler_zip">
+                                <option value="" selected disabled hidden></option>
+                                {% for zips in zip %}
+                                <option value={{zips.zip_id}}>{{zips.zip}}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                    </div>
+                </div>
+
+
+                    <div class='row'>
+                            <div class="input-field col s4">
+                                    <p>
+                                        <label for="id_recycler_state">State:</label>
+                                        <select style="display:block" name="recycler_state" required id="id_recycler_state">
+                                            <option value="" selected disabled hidden></option>
+                                            {% for states in state %}
+                                            <option value={{states.state_id}}>{{states.state_name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </p>
+                                </div>
+                                <div class="input-field col s4">
+                                        <p>
+                                            <label for="id_recycler_country">Country:</label>
+                                            <select style="display:block" name="recycler_country" required id="id_recycler_country">
+                                                <option value="" selected disabled hidden></option>
+                                                {% for countrys in country %}
+                                                <option value={{countrys.country_id}}>{{countrys.country_name}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </p>
+                                    </div>
+                                
+          
+                          <div class='input-field col s4'>
+                              <input type='number' name='recycler_phone_no' autofocus required id='id_recycler_phone_no' />
+                              <label for='id_recycler_phone_no'>Phone No.</label>
+                            </div>
+          
+                        </div>
+
+            
+
+            <br />
+            <center>
+              <div class='row'>
+                <button type='submit' name='btn_login' class='col s12 btn btn-large btn-custom waves-effect' value="Login">SignUp</button>
+              </div>
+            </center>
+          </form>
+        </div>
+      </div>
+      <a href="{% url 'user_login' %}">Login</a>
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+  </main>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <html>
+    <head>
+        <title>Registration Form</title>
+    </head>
+    <body>
+
+        <h1>User SignUp Form</h1>
+        <p><a href = #>Back</a> / <a href = {% url 'user_login' %}>Login</a></p>
+        <form method="post" action="#">{% csrf_token %}
+
+            {{ user_form.as_p }}
+            {{ recycler_form.as_p }}
+            <input type="submit" name="submit" value="Register" />
+        </form>
+    </body>
+</html> -->

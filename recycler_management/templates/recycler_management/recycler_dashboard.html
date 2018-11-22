@@ -1,0 +1,394 @@
+{% extends "hotel_management/base.html" %}
+{% load staticfiles %}
+{% block title %} Recycler Dashboard {% endblock %}
+{% block content %}
+
+
+    <!-- Start Page Loading --> 
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
+    
+
+   
+
+
+    <!-- START MAIN -->
+    <div id="main">
+      <!-- START WRAPPER -->
+      <div class="wrapper">
+          
+          <!-- START CONTENT -->
+          <section id="content">
+
+
+<!--breadcrumbs start-->
+<div id="breadcrumbs-wrapper">
+    <!-- Search for small screen -->
+    <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+      <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col s10 m6 l6">
+          <h5 class="breadcrumbs-title">Recycler Dashboard</h5>
+          <ol class="breadcrumbs">
+            <li><a href="#">Dashboard</a>
+            </li>
+            <li><a href="{% url 'user_logout' %}">Logout</a>
+            </li>
+            <li><a href="{% url 'user_passwordchange' %}">Change Password</a>
+            </li>
+          </ol>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!--breadcrumbs end-->
+
+
+
+
+
+
+
+
+
+
+
+            <!--start container-->
+            <div class="container">
+              <!--card stats start-->
+              
+
+<!--start card-box-->
+<div id="card-stats">
+    <div class="row mt-1">
+      <div class="col s12 m6 l3">
+        <div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
+          <div class="padding-4">
+            <div class="col s7 m7">
+              <i class="material-icons background-round mt-5">add_shopping_cart</i>
+              <p>Total Load</p>
+            </div>
+            <div class="col s5 m5 right-align">
+              <!-- <h5 class="mb-0">690</h5>
+              <p class="no-margin">New</p> -->
+              <p>{{ total }}</p>
+              <!-- <p>6,00,00</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l3">
+        <div class="card gradient-45deg-red-pink gradient-shadow min-height-100 white-text">
+          <div class="padding-4">
+            <div class="col s7 m7">
+              <i class="material-icons background-round mt-5">perm_identity</i>
+              <p>Total Open Load</p>
+            </div>
+            <div class="col s5 m5 right-align">
+              <!-- <h5 class="mb-0">1885</h5>
+              <p class="no-margin">New</p> -->
+              <p>{{ total_open }}</p>
+              <!-- <p>1,12,900</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l3">
+        <div class="card gradient-45deg-amber-amber gradient-shadow min-height-100 white-text">
+          <div class="padding-4">
+            <div class="col s7 m7">
+              <i class="material-icons background-round mt-5">timeline</i>
+              <p>Acknowledge</p>
+            </div>
+            <div class="col s5 m5 right-align">
+              <!-- <h5 class="mb-0">80%</h5>
+              <p class="no-margin">Growth</p> -->
+              <p>{{ total_aknwlge }}</p>
+              <!-- <p>3,42,230</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m6 l3">
+        <div class="card gradient-45deg-green-teal gradient-shadow min-height-100 white-text">
+          <div class="padding-4">
+            <div class="col s7 m7">
+              <i class="material-icons background-round mt-5">attach_money</i>
+              <p>Total Closed</p>
+            </div>
+            <div class="col s5 m5 right-align">
+              <!-- <h5 class="mb-0">$890</h5>
+              <p class="no-margin">Today</p> -->
+              <p>{{ total_close }}</p>
+              <!-- <p>$25,000</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End card-box-->
+
+
+<!--star Notification card-box-->
+<section>
+    <div class="row" >
+       <div class="col s12 m6 l6">
+          <div class="card  card-box">
+             <div class="card-head" style="text-align:center; background:#9c78cd; height: 30px">
+                <header>Notifications</header>
+             </div>
+             <div class="card-body no-padding height-9" style="margin:0 0 0 24px; overflow-y: scroll; max-height: 135px" >
+                {% for remarkloads in remarkload %}                                              
+                <div> <span class="text-purple">{{ remarkloads.user }}</span></div>
+                <div><span class="notificationcolor">{{ remarkloads.comment}}</span><span class="icon bg-primary" style="float:left"><i class="material-icons">mail_outline </i></span></div>
+                <span class="notificationtime"><small>{{ remarkloads.date }}</small></span> 
+                {% endfor %} 
+             </div>
+          </div>
+       </div>
+
+
+       <div class="col s12 m6 l6">
+           <div class="card  card-box">
+              <div class="card-head" style="text-align:center; background:#9c78cd; height: 30px">
+                 <header>Messages</header>
+              </div>
+              <div class="card-body no-padding height-9" style="margin:0 0 0 24px; overflow-y: scroll; max-height: 135px" >
+                 {% if messages %}
+ <ul class="messages">
+     {% for message in messages %}
+     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+     {% endfor %}
+ </ul>
+ {% endif %}
+
+              </div>
+           </div>
+        </div>
+
+
+    </div>
+ </section>
+<!--End Notification card-box-->
+
+
+
+
+  <!-- start recycler-->
+  <div id="card-widgets">
+      <div class="row">
+          <div class="col s12 m6 l12">
+              <ul id="task-card" class="collection with-header">
+                  <li class="collection-header teal accent-4">
+                    <h4 class="task-card-title">Recycler Dashboard(<u>{{user.username}})</h4>
+                          <!-- <a href="#" class="secondary-content">
+                            <span class="ultra-small">Create</span>
+                          </a> -->
+                    </li>
+
+                    <table class="highlight">
+                        <thead>
+                          <tr>
+                              <th class="valign-wrapper">
+                                <input type="checkbox" class="filled-in checkbox-pink" id="all" />
+                                <label for="all"></label>
+                              </th>
+                              
+                             <th>Hotel Name </th>
+                             <th>User Name </th>
+                             <th>Load no</th>
+                             <th>Date and time</th>
+                             <th>Pickup Date</th>
+                             <th>Contact details</th>
+                             <!-- <th>Remarks</th> -->
+                             <th>Status</th>
+                             <th>Update</th>
+                             
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for query in now1 %}
+                          <tr>
+                            <td class="valign-wrapper">
+                              <input type="checkbox" class="filled-in checkbox-pink" id="checkbox1" />
+                              <label for="checkbox1"></label>
+                            </td>
+                            <td> <a href="{% url 'recycler_dashboardgreendetail' query.pk %}"> {{query.hotel_id}}</a></td>
+                            <td>{{query.user_id}}</td>
+                            
+                            <td>
+                                <a href="{% url 'recycler_dashboarddetail' query.pk %}">{{query.load_no}}</a>
+                            </td>
+                            <!-- <td>{{query.zip}}</td> -->
+                            <td>{{query.date_and_time}}</td>
+                            <td>{{query.pickup_date}}</td>
+                            <td>{{query.contact_details}}</td>
+                            <td>{{query.status}}</td>
+                            <!-- <td>
+                              <a href="{% url 'recycler_dashboardupdate' pk=query.pk %}">Update</a>
+                          </td> -->
+
+                            {% if query.status == "Close" %}
+                              <td>
+                                  <a href="#">Closed</a>
+                              </td>
+                            {% else %}
+                            <td>
+                                <a href="{% url 'recycler_dashboardupdate' pk=query.pk %}">Update</a>
+                            </td>
+                            {% endif %}
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      </ul>
+            </div>
+            </div>
+    </div>
+  <!--End recycler-->
+
+
+
+
+
+
+
+
+              
+              
+            </div>
+            <!--end container-->
+          </section>
+          <!-- END CONTENT -->
+          
+        </div>
+        <!-- END WRAPPER -->
+      
+      </div>
+    <!-- END MAIN -->
+   
+    <!-- START FOOTER -->
+    
+    <!-- END FOOTER -->
+    
+    
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+   
+</head>
+
+<body>
+
+
+    {% for message in messages %} {{message}} {% endfor %}
+
+
+    <h1 align="center" style="color:red">Recycler Dashboard(<u>{{user.username}}</u>)</h1>
+    <p><a href="{% url 'user_logout' %}">Logout</a> / <a href="{% url 'user_passwordchange' %}">Change Password</a></p>
+    
+    
+
+    <table id="checkboxes">
+        <tr>
+            <th><input style="width:40px !important;" type="checkbox" id="checkall" /> </th>
+            <th>User id </th>
+            <th>Load no</th>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Weight</th>
+            <th>No. of Bags</th>
+            <th>Date and time</th>
+            <th>Actual No. of Bags </th>
+            <th>Actual Weight</th>
+            <th>Contact details</th>
+            <th>Pickup Date</th>
+            <th> Status</th>
+            <th>Update</th>
+        </tr>
+        
+        {% for query in query %}
+        <tr>
+            <th><input class="chkbx" type="checkbox"  /></th>
+            <td>{{query.user_id}}</td>
+            <td>
+                <a href="{% url 'recycler_dashboarddetail' query.pk %}">{{query.load_no}}</a>
+            </td>
+            <td>{{query.product}}</td>
+            <td>{{query.category.category_name}}</td>
+            <td>{{query.weight}}</td>
+            <td>{{query.no_of_bags}}</td>
+            <td>{{query.date_and_time}}</td>
+            <td>{{query.actual_no_of_bags}}</td>
+            <td>{{query.actual_weight}}</td>
+            <td>{{query.contact_details}}</td>
+            <td> {{query.pickup_date}} </td>
+            <td>{{query.status}}</td>
+            <td>
+                <a href="{% url 'recycler_dashboardupdate' query.pk %}" >Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+           
+
+    </table>
+    
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script>
+            $(document).ready(function() {
+              $('#checkall').click(function() {
+                var checked = $(this).prop('checked');
+                //$('#checkboxes').find('input:checkbox').prop('checked', checked);
+                  $('#checkboxes').find('.chkbx').prop('checked', checked);
+              });
+            })
+            </script> 
+    
+</body>
+
+</html> -->

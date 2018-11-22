@@ -1,0 +1,31 @@
+
+
+.btn-custom {
+    background-color: #00d805 !important;
+}
+
+.active{
+    line-height: 2.5em;
+}
+.indigo-text-co{
+    color: #060708;
+}
+
+.ele-style{
+    padding-left:10%;
+    padding-right:10%;
+}
+
+/* homepage-box-color */
+.bgboxcolor {
+    background-color: rgb(240, 247, 234) !important;
+    border:solid rgb(69, 70, 69);
+    height: 300px !important;
+    width:48% !important;
+    margin-left: 20px !important;
+    
+}
+
+.h3head {
+    margin-top:71px;
+}

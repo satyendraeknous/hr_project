@@ -1,0 +1,127 @@
+{% load staticfiles %}
+
+<aside id="left-sidebar-nav">
+    <ul id="slide-out" class="side-nav fixed leftside-navigation">
+      <li class="user-details cyan darken-2">
+        <div class="row">
+          <div class="col col s4 m4 l4">
+            <img src="{% static 'hotel_management/images/avatar/avatar-7.png' %}" alt="" class="circle responsive-img valign profile-image cyan">
+          </div>
+          <div class="col col s8 m8 l8">
+            <ul id="profile-dropdown-nav" class="dropdown-content">
+              <li>
+                <a href="#" class="grey-text text-darken-1">
+                  <i class="material-icons">face</i> Profile</a>
+              </li>
+              <li>
+                <a href="#" class="grey-text text-darken-1">
+                  <i class="material-icons">settings</i> Settings</a>
+              </li>
+              <li>
+                <a href="#" class="grey-text text-darken-1">
+                  <i class="material-icons">live_help</i> Help</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="#" class="grey-text text-darken-1">
+                  <i class="material-icons">lock_outline</i> Lock</a>
+              </li>
+              <li>
+                <a href="{% url 'user_logout' %}" class="grey-text text-darken-1">
+                  <i class="material-icons">keyboard_tab</i> Logout</a>
+              </li>
+            </ul>
+            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown-nav">{{user.username}}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+            <p class="user-roal">Administrator</p>
+          </div>
+        </div>
+      </li>
+      <li class="no-padding">
+        <ul class="collapsible" data-collapsible="accordion">
+          <li class="bold">
+            {% if user.groups.all.0.name == "Hotel" %}
+            <a href="{% url 'hotel_dashboard' %}" class="waves-effect waves-cyan">
+                <i class="material-icons">pie_chart_outlined</i>
+                <span class="nav-text">Dashboard</span>
+              </a>
+            {% elif user.groups.all.0.name == "Recycler" %}
+              <a href="{% url 'recycler_dashboard' %}" class="waves-effect waves-cyan">
+                  <i class="material-icons">pie_chart_outlined</i>
+                  <span class="nav-text">Dashboard</span>
+                </a>
+            {% elif user.groups.all.0.name == "Sycco" %}
+                <a href="{% url 'sycco_dashboard' %}" class="waves-effect waves-cyan">
+                    <i class="material-icons">pie_chart_outlined</i>
+                    <span class="nav-text">Dashboard</span>
+                  </a>
+            {% endif %}
+
+          </li>
+          <li class="bold">
+              {% if user.groups.all.0.name == "Hotel" %}
+            <a href="{% url 'hotel_dashboardcreate' %}" class="waves-effect waves-cyan">
+                <i class="material-icons">format_color_text</i>
+                <span class="nav-text">Create</span>
+              </a>
+              {% elif user.groups.all.0.name == "Sycco" %}
+              <a href="{% url 'sycco_dashboardcreate' %}" class="waves-effect waves-cyan">
+                  <i class="material-icons">format_color_text</i>
+                  <span class="nav-text">Create</span>
+                </a>
+                {% elif user.groups.all.0.name == "Recycler" %}
+                <a href="#" class="waves-effect waves-cyan">
+                    <i class="material-icons">format_color_text</i>
+                    <span class="nav-text">Create</span>
+                  </a>
+                {% endif %}
+          </li>
+
+
+          <!-- <li class="bold">
+            <a href="#" class="waves-effect waves-cyan">
+                <i class="material-icons">insert_link</i>
+                <span class="nav-text">Total GreenPoint</span>
+              </a>
+          </li> -->
+          <!-- <li class="bold">
+            <a href="#" class="waves-effect waves-cyan">
+                <i class="material-icons">format_color_text</i>
+                <span class="nav-text">Forms</span>
+              </a>
+          </li> -->
+          <!-- <li class="bold">
+            <a href="#" class="waves-effect waves-cyan">
+                <i class="material-icons">format_size</i>
+                <span class="nav-text">Typography</span>
+              </a>
+          </li> -->
+          <!-- <li class="bold">
+            <a href="#" class="waves-effect waves-cyan">
+                <i class="material-icons">invert_colors</i>
+                <span class="nav-text">Color</span>
+              </a>
+          </li> -->
+          <!-- <li class="bold">
+            <a href="#" class="waves-effect waves-cyan">
+                <i class="material-icons">border_all</i>
+                <span class="nav-text">Table</span>
+              </a>
+          </li> -->
+          <!-- <li class="bold">
+            <a href="#" class="waves-effect waves-cyan">
+              <i class="material-icons">lightbulb_outline</i>
+              <span class="nav-text">Icons</span>
+            </a>
+          </li> -->
+          <!-- <li>
+            <a class="btn waves-effect waves-light gradient-45deg-red-pink" href="#" target="_blank">
+              <i class="material-icons white-text">file_upload</i>Upgrade to Pro!
+            </a>
+          </li> -->
+        </ul>
+      </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only">
+      <i class="material-icons">menu</i>
+    </a>
+  </aside>

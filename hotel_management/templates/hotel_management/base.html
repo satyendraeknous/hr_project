@@ -1,0 +1,69 @@
+{% load staticfiles %}
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+     {% include "hotel_management/head.html" %}
+ </head>
+
+ <body>
+    {% include "hotel_management/header.html" %}
+    {% include "hotel_management/sidebar_left.html" %}
+   {% block content %}
+   
+   
+   {% endblock %}
+   {% include "hotel_management/footer.html" %}
+
+
+   {% block JS %}
+   {% endblock %}
+
+
+
+
+
+<!-- script for pickup date -->
+<script>
+   jQuery(function($) {
+  $(".button-collapse").sideNav();
+});
+/**
+ * end of responsive side menu
+ */
+/**
+ * start of checkbox-table
+ */
+jQuery(function($) {
+  $("td input[type=checkbox]").on('change', function (e) {
+    console.log('change');
+    row = $(this).closest('tr');
+    console.log(row);
+    console.log($(this).is(':checked'));
+    if ($(this).is(':checked')) {
+        row.addClass('selected');
+    } else {
+        row.removeClass('selected');
+    }
+  });
+});
+  
+</script>
+ 
+
+
+
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script> -->
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script> -->
+<!-- jQuery Library -->
+<script type="text/javascript" src="{% static 'hotel_management/vendors/jquery-3.2.1.min.js' %}"></script>
+<!--materialize js-->
+<script type="text/javascript" src="{% static 'hotel_management/js/materialize.min.js' %}"></script>
+<!--scrollbar-->
+<script type="text/javascript" src="{% static 'hotel_management/vendors/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+<!--plugins.js - Some Specific JS codes for Plugin Settings-->
+<script type="text/javascript" src="{% static 'hotel_management/js/plugins.js' %}"></script>
+<!--custom-script.js - Add your own theme custom JS-->
+<script type="text/javascript" src="{% static 'hotel_management/js/custom-script.js' %}"></script>
+</body>
+ </html>

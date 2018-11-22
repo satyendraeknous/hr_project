@@ -1,0 +1,176 @@
+{% extends "mvppage/base.html" %}
+{% load staticfiles %}
+{% block title %} Hotel Search{% endblock %}
+{% block content %}
+<main>
+   <center>
+      <img class="responsive-img" style="width: 250px;" src="{% static 'mvppage/images/logo.png' %}" alt="eKnous Technology SOlutions Logo"/>
+      <h5 class="black-text">
+         Hotel Search 
+         <p>
+         <h6><a href="#">Back</a> /
+            <a href="{% url 'mvp' %}">Register</a> / 
+            <a href="{% url 'user_login' %}">Login</a>
+         </h6>
+         </p>
+      </h5>
+      <div class="section"></div>
+
+
+      {% for message in messages %}{{ message }}{% endfor %}
+
+      <div class="container">
+            
+         <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+            <form class="col s12" method="POST" action="">
+               {% csrf_token %}
+               <div class='row'>
+                  <div class='col s12'>
+                  </div>
+               </div>
+               <div class='row'>
+                  <div class='input-field col s12'>
+                     <input type='text' name='hotel_zip' autofocus required id='id_hotel_zip' maxlength="254"/>
+                     <label for='id_hotel_zip'>Enter Zip</label>
+                  </div>
+               </div>
+               <br />
+              
+               <center>
+                  <div class='row'>
+                     <button type='submit' name='btn_login' class='col s12 btn btn-large btn-custom waves-effect' value="Search">Search</button>
+                  </div>
+               </center>
+               
+            </form>
+         </div>
+        
+         <table border="1">
+            <tr>
+               <th>Hotel Name</th>
+               <th>Brand</th>
+               <th>Address1</th>
+               <th>Address2</th>
+               <th>City</th>
+               <th>State</th>
+               <th>Zip</th>
+               <th>Country</th>
+               <th>Phone NO</th>
+            </tr>
+            {% for query in getfilter %}
+            <tr>
+               <td>
+                  <a href="{% url 'hotel_search_details' query.pk %}"> {{query.hotel_name}}</a>
+               </td>
+               <td>{{query.hotel_brand}}</td>
+               <td>{{query.hotel_address1}}</td>
+               <td>{{query.hotel_address2}}</td>
+               <td>{{query.hotel_city}}</td>
+               <td>{{query.hotel_state}}</td>
+               <td>{{query.hotel_zip }}</td>
+               <td>{{query.hotel_country}}</td>
+               <td>{{query.hotel_phone_no}}</td>
+            </tr>
+            {% endfor %}
+         </table>
+      </div>
+   </center>
+   <div class="section"></div>
+   <div class="section"></div>
+</main>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hotel Search </h1>
+    <form method="POST" action=".">{% csrf_token %}
+         {{ frm.as_p}}
+        <input type="submit" value="Search" name="submit">
+    </form>
+    <h1 align="center" style="color:red">Hotel Searh Board</h1>
+    <a href="#">Logout</a>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Hotel Name</th>
+            <th>Brand</th>
+            <th>Address1</th>
+            <th>Address2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Country</th>
+            <th>Phone NO</th>
+        </tr>
+        {% for query in getfilter %}
+        <tr>
+            <td>
+                <a href="{% url 'hotel_search_details' query.pk %}"> {{query.hotel_name}}</a>
+            </td>
+            <td>{{query.hotel_brand}}</td>
+            <td>{{query.hotel_address1}}</td>
+            <td>{{query.hotel_address2}}</td>
+            <td>{{query.hotel_city}}</td>
+            <td>{{query.hotel_state}}</td>
+            <td>{{query.hotel_zip }}</td>
+            <td>{{query.hotel_country}}</td>
+            <td>{{query.hotel_phone_no}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

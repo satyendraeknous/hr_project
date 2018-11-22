@@ -1,0 +1,81 @@
+
+
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hotel Search </h1>
+    <form method="POST" action=".">{% csrf_token %}
+         {{ frm.as_p}}
+        <input type="submit" value="Search" name="submit">
+    </form>
+    <h1 align="center" style="color:red">Hotel Searh Board</h1>
+    <a href="#">Logout</a>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>Hotel Name</th>
+            <th>Brand</th>
+            <th>Address1</th>
+            <th>Address2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Country</th>
+            <th>Phone NO</th>
+        </tr>
+        {% for query in getfilter %}
+        <tr>
+            <td>
+                <a href="{% url 'hotel_search_details' query.pk %}"> {{query.hotel_name}}</a>
+            </td>
+            <td>{{query.hotel_brand}}</td>
+            <td>{{query.hotel_address1}}</td>
+            <td>{{query.hotel_address2}}</td>
+            <td>{{query.hotel_city}}</td>
+            <td>{{query.hotel_state}}</td>
+            <td>{{query.hotel_zip }}</td>
+            <td>{{query.hotel_country}}</td>
+            <td>{{query.hotel_phone_no}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

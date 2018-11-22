@@ -1,0 +1,191 @@
+{% extends "hotel_management/base.html" %}
+{% load staticfiles %}
+{% block title %} Hotel Dashboard {% endblock %}
+{% block content %}
+
+
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
+    
+
+   
+
+
+    <!-- START MAIN -->
+    <div id="main">
+      <!-- START WRAPPER -->
+      <div class="wrapper">
+          
+          <!-- START CONTENT -->
+          <section id="content">
+            <!--start container-->
+            <div class="container">
+              <!--card stats start-->
+              
+              
+
+              
+              {% for message in messages %} {{message}} {% endfor %}
+    
+
+              <!-- <h1 align="center" style="color:red">Hotel Dashboard Create </h1> -->
+              <a href="{% url 'recycler_dashboard' %}">Recycler Dashboard</a>/
+              <a href="#">Update</a>
+              
+          
+                      <div id="basic-form" class="section">
+                          <div class="row">
+                            <div class="col s12 m12 l6">
+                              <div class="card-panel">
+                                <!-- <h4 class="header2">Basic Form</h4> -->
+                                <div class="row">
+                                  <form class="col s12" method="POST" action="">{% csrf_token %}
+                                  
+                                    <div class="row">
+                                            <div class="input-field col s6">
+                                                    <input id="id_no_of_bags" type="text" name="no_of_bags" value={{object.no_of_bags}} readonly>
+                                                    <label for="id_no_of_bags">No of Bags</label>
+                                                  </div>
+                              
+                                    
+                                            <div class="input-field col s6">
+                                                    <input id="id_weight" type="text" name="weight" value={{object.weight}} readonly>
+                                                    <label for="id_weight">Weight</label>
+                                                  </div>
+                                                  
+                                    </div>
+                                    {% if object.status == "Processing" %}
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="id_pickup_date" name="pickup_date" class="format" type="date" required>
+                                            <label for="id_pickup_date" class="active">Pickup date</label>
+                                          </div>
+                                    
+                                      
+                                      </div>
+                                      {% else %}
+                                      <div class="row">
+                                          <div class="input-field col s6">
+                                            <input id="id_actual_weight" name="actual_weight" type="number" value="{{object.actual_weight}}" required >
+                                            <label for="id_actual_weight">Actual weight</label>
+                                          </div>
+                                          <div class="input-field col s6">  
+                                              <input id="id_actual_no_of_bags" name="actual_no_of_bags" type="number" value={{object.actual_no_of_bags}} required >
+                                              <label for="id_actual_no_of_bags">Actual no of bags</label>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                          <div class="input-field col s6">  
+                                              <input id="id_remarks" name="remarks" type="text"  >
+                                              <label for="id_remarks">Remark</label>
+                                            </div>
+                                          </div>
+
+                                          {% endif %}
+                                          <div class="row">
+                                            <div class="input-field col s6">
+                                              <input id="id_status" name="status" type="text" value="{{object.status}}" readonly>
+                                              <label for="id_status">Status</label>
+                                            </div>
+                                            <!-- <div class="input-field col s6">
+                                              <input id="id_contact_details" name="contact_details" type="text" value="{{object.contact_details}}">
+                                              <label for="id_contact_details">Contact details</label>
+                                            </div>
+                                            </div> -->
+                                      <div class="row">
+                                            <div class="input-field col s6">
+                                                    <input id="id_load_no" name="load_no" type="text" value="{{object.load_no}}" readonly>
+                                                    <label for="id_load_no">Load no</label>
+                                                  </div>
+                                        <div class="input-field col s6">
+                                          <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
+                                            <i class="material-icons right">send</i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </form>
+                                
+                    
+                              
+                                </div>
+                              </div>
+                            </div>
+        
+            </div>
+            <!--end container-->
+          </section>
+          <!-- END CONTENT -->
+          
+        </div>
+        <!-- END WRAPPER -->
+      
+      </div>
+    <!-- END MAIN -->
+   
+    <!-- START FOOTER -->
+    
+    <!-- END FOOTER -->
+    
+    
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <html>
+
+<head>
+
+</head>
+
+<body>
+    <h1 align="center" style="color:red">Recycler Dashboard Update Form</h1>
+   
+    <a href="{% url 'user_logout' %}">Logout</a>
+    <br>
+    <br>
+
+    
+
+    <form method="POST" action=".">{% csrf_token %} 
+        {{form.as_p}}
+       
+
+
+        <input type="submit" value="Update">
+    </form>
+
+
+</body>
+
+</html> -->

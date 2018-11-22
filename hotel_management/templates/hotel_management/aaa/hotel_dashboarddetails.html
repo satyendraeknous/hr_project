@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <title></title>
+
+</head>
+
+<body>
+    <h1>Hotel Dashboard Details </h1>
+    <p><a href="{% url 'user_logout' %}">Logout</a></p>
+    <table border="1">
+        <tr>
+            <td>User Name:</td>
+            <td>{{instance.user_id}}</td>
+        </tr>
+        <tr>
+            <td>Hotel Name:</td>
+            <td>{{instance.hotel_id}}</td>
+        </tr>
+        <tr>
+                <td>Category:</td>
+                <td>{{instance.category.category_name}}</td>
+            </tr>
+            <tr>
+                    <td>Product:</td>
+                    <td>{{instance.product}}</td>
+                </tr>
+
+        <tr></tr>
+        <td>Load no:</td>
+        <td>{{instance.load_no}}</td>
+        </tr>
+        <tr>
+            <td>Date and time:</td>
+            <td>{{instance.date_and_time}}</td>
+        </tr>
+        <tr>
+            <td>Pickup Dates:</td>
+            <td>{{instance.pickup_date}}</td>
+        </tr>
+        <tr>
+            <td>Contact details:</td>
+            <td>{{instance.contact_details}}</td>
+        </tr>
+        
+        <tr>
+            <td>No. of bags:</td>
+            <td>{{instance.no_of_bags}}</td>
+        </tr>
+        <tr>
+            <td>Weight:</td>
+            <td>{{instance.weight}}</td>
+        </tr>
+        <tr>
+            <td>Actual No of Bags:</td>
+            <td>{{instance.actual_no_of_bags}}</td>
+        </tr>
+        <tr>
+            <td>Actual Weight:</td>
+            <td>{{instance.actual_weight}}</td>
+        </tr>
+
+        <tr>
+            <td>Status:</td>
+            <td>{{instance.status}}</td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,247 @@
+{% extends 'hotel_management/base.html' %}
+{% load staticfiles %}
+{% block title %}Hotel Dashboard Details{% endblock %}
+{% block content %}
+<!-- Start Page Loading -->
+<div id="loader-wrapper">
+   <div id="loader"></div>
+   <div class="loader-section section-left"></div>
+   <div class="loader-section section-right"></div>
+</div>
+<!-- START MAIN -->
+<div id="main">
+
+   <!-- START WRAPPER -->
+   <div class="wrapper">
+      <section id="content">
+         <!--breadcrumbs start-->
+         <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+               <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+
+
+            
+
+
+            <div class="container">
+               <div class="row">
+                  <div class="col s12">
+                     <!-- <h5 class="breadcrumbs-title">Basic Tables</h5> -->
+                     <ol class="breadcrumbs">
+                        <li>
+                           <a href="{% url 'hotel_dashboard' %}">
+                              <h4>Hotel Dashboard</h4>
+                           </a>
+                        </li>
+                        <li><a href="#">Load Details</a></li>
+                        <!-- <li class="active">Basic Tables</li> -->
+                     </ol>
+                  </div>
+                  
+               </div>
+            </div>
+         </div>
+
+         <!--breadcrumbs end-->
+         <section>
+                <div class="row" >
+                   <div class="col s12 m6 l6">
+                      <div class="card  card-box">
+                         <div class="card-head" style="text-align:center; background:#9c78cd; height: 30px">
+                            <header>Notifications</header>
+                         </div>
+                         <div class="card-body no-padding height-9" style="margin:0 0 0 24px; overflow-y: scroll; max-height: 135px" >
+                            {% for remarkloads in remarkload %}                                              
+                            <div> <span class="text-purple">{{ remarkloads.user }}</span></div>
+                            <div><span class="notificationcolor">{{ remarkloads.comment}}</span><span class="icon bg-primary" style="float:left"><i class="material-icons">mail_outline </i></span></div>
+                            <span class="notificationtime"><small>{{ remarkloads.date }}</small></span> 
+                            {% endfor %} 
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </section>
+         <!--start container-->
+         <div class="container">
+            <div class="section">
+               <div id="striped-table">
+                  <!-- <h4 class="header">Hotel Details</h4> -->
+                  <div class="row">
+                     <div class="col s12">
+                        <table class="striped">
+                           <table border="1">
+                              <tr>
+                                 <td>User Name:</td>
+                                 <td>{{instance.user_id}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Hotel Name:</td>
+                                 <td>{{instance.hotel_id}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Category:</td>
+                                 <td>{{instance.category.category_name}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Product:</td>
+                                 <td>{{instance.product}}</td>
+                              </tr>
+                              <tr></tr>
+                              <td>Load no:</td>
+                              <td>{{instance.load_no}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Date and time:</td>
+                                 <td>{{instance.date_and_time}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Pickup Dates:</td>
+                                 <td>{{instance.pickup_date}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Contact details:</td>
+                                 <td>{{instance.contact_details}}</td>
+                              </tr>
+                              <tr>
+                                 <td>No. of bags:</td>
+                                 <td>{{instance.no_of_bags}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Weight:</td>
+                                 <td>{{instance.weight}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Green Point Hotel:</td>
+                                 <td>{{instance.green_point_hotel}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Actual No of Bags:</td>
+                                 <td>{{instance.actual_no_of_bags}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Actual Weight:</td>
+                                 <td>{{instance.actual_weight}}</td>
+                              </tr>
+                              <tr>
+                                 <td>Green Point Recycler:</td>
+                                 <td>{{instance.green_point_recycler}}</td>
+                              </tr>
+                              <!-- <tr>
+                                 <td>Remarks:</td>
+                                 <td>{{instance.remarks}}</td>
+                              </tr> -->
+                              <tr>
+                                 <td>Status:</td>
+                                 <td>{{instance.status}}</td>
+                              </tr>
+                           </table>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </div>
+   <!-- END WRAPPER -->
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <html>
+
+<head>
+    <title></title>
+
+</head>
+
+<body>
+    <h1>Hotel Dashboard Details </h1>
+    <p><a href="{% url 'user_logout' %}">Logout</a></p>
+    <table border="1">
+        <tr>
+            <td>User Name:</td>
+            <td>{{instance.user_id}}</td>
+        </tr>
+        <tr>
+            <td>Hotel Name:</td>
+            <td>{{instance.hotel_id}}</td>
+        </tr>
+        <tr>
+                <td>Category:</td>
+                <td>{{instance.category.category_name}}</td>
+            </tr>
+            <tr>
+                    <td>Product:</td>
+                    <td>{{instance.product}}</td>
+                </tr>
+
+        <tr></tr>
+        <td>Load no:</td>
+        <td>{{instance.load_no}}</td>
+        </tr>
+        <tr>
+            <td>Date and time:</td>
+            <td>{{instance.date_and_time}}</td>
+        </tr>
+        <tr>
+            <td>Pickup Dates:</td>
+            <td>{{instance.pickup_date}}</td>
+        </tr>
+        <tr>
+            <td>Contact details:</td>
+            <td>{{instance.contact_details}}</td>
+        </tr>
+        
+        <tr>
+            <td>No. of bags:</td>
+            <td>{{instance.no_of_bags}}</td>
+        </tr>
+        <tr>
+            <td>Weight:</td>
+            <td>{{instance.weight}}</td>
+        </tr>
+        <tr>
+            <td>Actual No of Bags:</td>
+            <td>{{instance.actual_no_of_bags}}</td>
+        </tr>
+        <tr>
+            <td>Actual Weight:</td>
+            <td>{{instance.actual_weight}}</td>
+        </tr>
+
+        <tr>
+            <td>Status:</td>
+            <td>{{instance.status}}</td>
+        </tr>
+    </table>
+
+</body>
+
+</html> -->
+
+

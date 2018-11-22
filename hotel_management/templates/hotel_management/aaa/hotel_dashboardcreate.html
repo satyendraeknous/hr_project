@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <title>Create LoadDashboard</title>
+  </head>
+  <body>
+    <h1>Create LoadDashboard </h1>
+    <form method="POST" action="">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" value="submit">
+    </form>
+  </body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    
+</head>
+
+<body>
+    <h1 align="center" style="color:red">Hotel Dashboard Create Form</h1>
+    <a href="{% url 'user_logout' %}">Logout</a>
+    <br>
+    <br> 
+    
+   
+    <form method="POST" action="">{% csrf_token %} 
+
+          
+               
+<p><label for="id_product">Product:</label>                               
+            <select name="product" required id="id_product">
+                    <option value="" selected>Select</option>
+                    
+                    {% for product_obj in product_obj %}
+                     <option value="1">{{product_obj.product_name}}</option>
+                    {% endfor %}
+            </select>
+           </p> 
+
+           <p><label for="id_category">Category:</label>                               
+            <select name="category" required id="id_category">
+                    <option value="" selected>Select</option>
+                    
+                    {% for category_obj in category_obj %}
+                     <option value="1">{{category_obj.category_name}}</option>
+                    {% endfor %}
+            </select>
+           </p> 
+
+
+<p><label for="id_date_and_time">Date and time:</label> <input type="text" name="date_and_time" value="2018-08-14 12:33:06" required id="id_date_and_time" /><input type="hidden" name="initial-date_and_time" value="2018-08-14 12:33:06" id="initial-id_date_and_time" /></p>
+<p><label for="id_contact_details">Contact details:</label> <input type="number" name="contact_details" required id="id_contact_details" /></p>
+<p><label for="id_no_of_bags">No of bags:</label> <input type="text" name="no_of_bags" required id="id_no_of_bags" maxlength="150" /></p>
+<p><label for="id_weight">Weight:</label> <input type="text" name="weight" required id="id_weight" maxlength="150" /></p>
+       
+       <input type="submit" value="Submit" name="submit">
+   </form>
+
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,236 @@
+{% extends "hotel_management/base.html" %}
+{% load staticfiles %}
+{% block title %} Hotel Dashboard Create {% endblock %}
+{% block content %}
+<!-- Start Page Loading -->
+<div id="loader-wrapper">
+   <div id="loader"></div>
+   <div class="loader-section section-left"></div>
+   <div class="loader-section section-right"></div>
+</div>
+<!-- End Page Loading -->
+<!-- START MAIN -->
+<div id="main">
+<!-- START WRAPPER -->
+<div class="wrapper">
+<!-- START CONTENT -->
+<section id="content">
+   <!--start container-->
+   <div class="container">
+   <!--card stats start-->
+   {% if messages %} {{ message }}
+   <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+   </ul>
+   {% endif %}
+   <!-- {% for message in messages %} {{message}} {% endfor %} -->
+   <!-- <h1 align="center" style="color:red">Hotel Dashboard Create </h1> -->
+   <a href="{% url 'hotel_dashboard' %}">Hotel Dashboard</a>/
+   <a href="{% url 'hotel_dashboardcreate' %}">Create</a>
+   <div id="basic-form" class="section">
+      <div class="row">
+         <div class="col s12 m12 l6">
+            <div class="card-panel">
+               <!-- <h4 class="header2">Basic Form</h4> -->
+               <div class="row">
+                  <form class="col s12" method="POST" action="">
+                     {% csrf_token %}
+                     <div class="row">
+                        <div class="input-field col s12">
+                           <p>
+                              <label for="id_product">Product:</label>
+                              <select style="display:block" name="product" required id="id_product">
+                                 <option value="" selected disabled hidden></option>
+                                 {% for products in product %}
+                                 <option value={{products.product_id}}>{{products.product_name}}</option>
+                                 {% endfor %}
+                              </select>
+                           </p>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="input-field col s12">
+                           <p>
+                              <label for="id_category">Category:</label>
+                              <select style="display:block" name="category" required id="id_category">
+                                 <option value="" selected disabled hidden></option>
+                                 {% for categorys in category %}
+                                 <option value={{categorys.category_id}}>{{categorys.category_name}}</option>
+                                 {% endfor %}
+                              </select>
+                           </p>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="input-field col s12">
+                           <input id="id_contact_details" type="number" name="contact_details" >
+                           <label for="id_contact_details">Contact Details</label>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="input-field col s12">
+                           <input id="id_no_of_bags" name="no_of_bags" type="number" required >
+                           <label for="id_no_of_bags">No. Of Bags</label>
+                        </div>
+                       </div>
+                        <div class="row">
+                           <div class="input-field col s12">
+                              <input id="id_weight" name="weight" type="number" required >
+                              <label for="id_weight">Weight</label>
+                           </div>
+                          </div>
+                           <div class="row">
+                              <div class="input-field col s12">
+                                 <input id="id_remarks" name="remarks" type="text" >
+                                 <label for="id_remarks">Remarks</label>
+                              </div>
+                            </div>
+
+                           <div class="row">
+                              <div class="input-field col s12">
+                                 <button class="btn waves-effect waves-light right" type="submit" name="action">Submit
+                                 <i class="material-icons right">send</i>
+                                 </button>
+                              </div>
+                           </div>
+                        <!-- </div> -->
+                  </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--end container-->
+</section>
+<!-- END CONTENT -->
+</div>
+<!-- END WRAPPER -->
+</div>
+<!-- END MAIN -->
+<!-- START FOOTER -->
+<!-- END FOOTER -->
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <html>
+  <head>
+    <title>Create LoadDashboard</title>
+  </head>
+  <body>
+    <h1>Create LoadDashboard </h1>
+    <form method="POST" action="">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" value="submit">
+    </form>
+  </body>
+</html> -->
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    
+</head>
+
+<body>
+    <h1 align="center" style="color:red">Hotel Dashboard Create Form</h1>
+    <a href="{% url 'user_logout' %}">Logout</a>
+    <br>
+    <br> 
+    
+   
+    <form method="POST" action="">{% csrf_token %} 
+
+          
+               
+<p><label for="id_product">Product:</label>                               
+            <select name="product" required id="id_product">
+                    <option value="" selected>Select</option>
+                    
+                    {% for product_obj in product_obj %}
+                     <option value="1">{{product_obj.product_name}}</option>
+                    {% endfor %}
+            </select>
+           </p> 
+
+           <p><label for="id_category">Category:</label>                               
+            <select name="category" required id="id_category">
+                    <option value="" selected>Select</option>
+                    
+                    {% for category_obj in category_obj %}
+                     <option value="1">{{category_obj.category_name}}</option>
+                    {% endfor %}
+            </select>
+           </p> 
+
+
+<p><label for="id_date_and_time">Date and time:</label> <input type="text" name="date_and_time" value="2018-08-14 12:33:06" required id="id_date_and_time" /><input type="hidden" name="initial-date_and_time" value="2018-08-14 12:33:06" id="initial-id_date_and_time" /></p>
+<p><label for="id_contact_details">Contact details:</label> <input type="number" name="contact_details" required id="id_contact_details" /></p>
+<p><label for="id_no_of_bags">No of bags:</label> <input type="text" name="no_of_bags" required id="id_no_of_bags" maxlength="150" /></p>
+<p><label for="id_weight">Weight:</label> <input type="text" name="weight" required id="id_weight" maxlength="150" /></p>
+       
+       <input type="submit" value="Submit" name="submit">
+   </form>
+
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+{% extends "mvppage/base.html" %}
+{% load staticfiles %}
+{% block title %} Login {% endblock %}
+
+
+
+
+{% block content %}
+<div class="section"></div>
+  <main>
+    <center>
+      <img class="responsive-img" style="width: 250px;" src="{% static 'mvppage/images/logo.png' %}" alt="eKnous Technology SOlutions Logo"/>
+      <div class="section"></div>
+
+          {% for message in messages %}{{ message }}{% endfor %}
+     
+      <h5 class="indigo-text"><p>Invalid!.</p></h5>
+          <!-- <p>Please enter valid link.</p> -->
+      <div class="section"></div>
+
+      
+      <!-- <a href="{% url 'mvp' %}">Create account</a> -->
+
+    </center>
+
+    <div class="section"></div>
+    <div class="section"></div>
+  </main>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+
+
+
+<html>
+<head>
+<title>Hotel DashboardUpdate</title>
+</head>
+<body>
+    <h1 align="center" style="color:red">Hotel Dashboard Update Form</h1>
+    <a href="{% url 'user_logout' %}">Logout</a>
+    <br>
+    <br>
+
+    <form method="POST" action="">{% csrf_token %}
+
+        {{form.as_p}}
+
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
+
+

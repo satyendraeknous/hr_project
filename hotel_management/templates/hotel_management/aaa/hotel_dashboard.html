@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+    {% for message in messages %} {{message}} {% endfor %}
+    
+
+    <h1 align="center" style="color:red">Hotel Dashboard (<u>{{user.username}}</u>)</h1>
+    <a href="{% url 'user_logout' %}">Logout</a>/
+    <a href="{% url 'user_passwordchange' %}">Change Password</a>
+    <p align="right">
+        <a href="{% url 'hotel_dashboardcreate' %}">Create</a>
+        <p>
+<p>{{group}}</p>
+            <table id="checkboxes">
+                <tr>
+                    <th>
+                        <input style="width:40px !important;" type="checkbox" id="checkall" /> </th>
+                    <th>User id </th>
+                    <th>Load no</th>
+                    <th>Date and time</th>
+                    <th>Pickup Date</th>
+                    <th>Contact details</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                    
+                </tr>
+                {% for query in queryset %}
+                <tr>
+                    <th>
+                        <input class="chkbx" type="checkbox" />
+                    </th>
+                    <td>{{query.user_id}}</td>
+                    <td>
+                        <a href="{% url 'hotel_dashboarddetails' query.pk %}">{{query.load_no}}</a>
+                    </td>
+                    <td>{{query.date_and_time}}</td>
+                    <td>{{query.pickup_date}}</td>
+                    <td>{{query.contact_details}}</td>
+                    <td>{{query.status}}</td>
+                    <td>
+                        <a href="{% url 'hotel_dashboardupdate' pk=query.pk %}">Update</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'hotel_dashboarddelete' pk=query.pk %}">Delete</a>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+                
+            </table>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            
+            <script>
+                $(document).ready(function () {
+                    $('#checkall').click(function () {
+                        var checked = $(this).prop('checked');
+                        //$('#checkboxes').find('input:checkbox').prop('checked', checked);
+                        $('#checkboxes').find('.chkbx').prop('checked', checked);
+                    });
+                })
+            </script>
+
+</body>
+
+</html>
+

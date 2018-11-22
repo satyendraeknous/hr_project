@@ -1,0 +1,60 @@
+{% load staticfiles %}
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+     {% include "mvppage/head.html" %}
+ </head>
+
+ <body>
+   {% block content %}
+   {% endblock %}
+
+
+
+   {% block JS %}
+   {% endblock %} 
+
+
+
+
+       <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css"> -->
+
+    <!-- Compiled and minified JavaScript -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+ 
+<!-- script for conform Password -->
+<script type="text/javascript">
+   // console.log("mydata ");
+  $("#submitbtn").attr("disabled","disabled");
+       $("#id_new_password1").on("focusout", function (e) {
+          
+       if ($(this).val() != $("#id_new_password2").val()) {
+           $("#message").empty();
+           $("#message").text("Password Not matched");
+           $("#submitbtn").attr("disabled","disabled");
+       } else {
+        $("#message").empty();
+        $("#message").text("Password matched");
+        $("#submitbtn").removeAttr("disabled","disabled");
+       }
+   });
+   
+   $("#id_new_password2").on("keyup", function (e) {
+       if ($("#id_new_password1").val() != $(this).val()) {
+           $("#message").empty();
+           $("#message").text("Password Not matched");
+           $("#submitbtn").attr("disabled","disabled");
+       } else {
+        $("#message").empty();
+        $("#message").text("Password matched");
+        $("#submitbtn").removeAttr("disabled","disabled");
+       }
+   });
+ 
+       </script>
+</body>
+ </html>
