@@ -34,22 +34,12 @@
 /**
  * start of checkbox-table
  */
-jQuery(function($) {
-  $("td input[type=checkbox]").on('change', function (e) {
-    console.log('change');
-    row = $(this).closest('tr');
-    console.log(row);
-    console.log($(this).is(':checked'));
-    if ($(this).is(':checked')) {
-        row.addClass('selected');
-    } else {
-        row.removeClass('selected');
-    }
-  });
-});
+
   
 </script>
- 
+
+
+
 
 
 
@@ -65,5 +55,16 @@ jQuery(function($) {
 <script type="text/javascript" src="{% static 'hotel_management/js/plugins.js' %}"></script>
 <!--custom-script.js - Add your own theme custom JS-->
 <script type="text/javascript" src="{% static 'hotel_management/js/custom-script.js' %}"></script>
+
+
+
+
+
+
+
+
+
+
+
 </body>
  </html>

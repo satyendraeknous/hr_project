@@ -190,9 +190,10 @@
                         <ul id="task-card" class="collection with-header">
                             <li class="collection-header teal accent-4">
                               <h4 class="task-card-title">Hotel Dashboard(<u>{{user.username}})</h4>
-                                    <a href="{% url 'hotel_dashboardcreate' %}" class="secondary-content">
-                                      <span class="ultra-small">Create</span>
-                                    </a>
+                                    <!-- <a href="{% url 'hotel_dashboardcreate' %}" class="secondary-content">
+                                      <span class="ultra-small">Create</span></a> -->
+                                      <a href="{% url 'hotel_dashboardcreate' %}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                                    
                               </li>
 
                               <table class="highlight">
@@ -201,6 +202,7 @@
                                         <th class="valign-wrapper">
                                           <input type="checkbox" class="filled-in checkbox-pink" id="all" />
                                           <label for="all"></label>
+                                          
                                         </th>
                                         <th>User Name </th>
                                        <th>Hotel Name </th>
@@ -220,6 +222,7 @@
                                       <td class="valign-wrapper">
                                         <input type="checkbox" class="filled-in checkbox-pink" id="checkbox1" />
                                         <label for="checkbox1"></label>
+                    
                                       </td>
                                        <td>{{query.user_id}}</td>
                                        <td> <a href="{% url 'hotel_dashboardhoteldetail' query.pk %}">{{query.hotel_id}}</a></td>

@@ -2,7 +2,7 @@
 	Item Name: Materialize - Material Design Admin Template
 	Version: 4.0
 	Author: PIXINVENT
-	Author URL: https://themeforest.net/user/pixinvent/portfolio
+	Author URL: https://themeforest.net/user/pixinvent/portfolio 
 ================================================================================
 
 NOTE:
@@ -11,3 +11,6 @@ PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER 
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 
 
+.btn-floating {
+	float:right;
+}

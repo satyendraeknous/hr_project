@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
@@ -87,6 +87,7 @@ class Sycco_Registration(View):
 #--------End SyccoProfile Registration-------->
 
 
+#--------Start Sycco Dashboard-------->
 @method_decorator(login_required, name='dispatch')
 class Sycco_Dashboard(ListView):
     model = SyccoMaster
@@ -97,6 +98,60 @@ class Sycco_Dashboard(ListView):
     #     context = super(Recycler_Dashboard, self).get_context_data(*args, **kwargs)
     #     #context['query1'] = LoadDashboard.objects.all().filter(hotel_zip=2)
     #     return context
+
+
+class Sycco_DashboardDetail(DetailView): 
+    model = SyccoMaster
+    template_name = 'sycco_management/sycco_dashboarddetail.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(Sycco_DashboardDetail, self).get_context_data(*args, **kwargs)
+        idd = self.kwargs.get('pk')
+        instance = get_object_or_404(SyccoMaster, pk=idd)
+        h_name = HotelMaster.objects.get(hotel_name=instance.company_name)
+        recyObj = RecyclerMaster.objects.get(recycler_zip=h_name.hotel_zip)
+        c_sycco = SyccoMaster.objects.get(company_name=recyObj.recycler_name)
+        context['now'] = c_sycco
+        return context
+
+
+
+class Sycco_DashboardCreate(CreateView):
+
+    form_class = SyccoMasterForm
+    template_name = 'sycco_management/sycco_dashboardcreate.html'
+    success_url = reverse_lazy('sycco_dashboard')
+
+    def form_valid(self, form):
+
+        fo = form.save(commit=False)
+        uss = User.objects.get(username=str(self.request.user))
+        fo.user = uss
+        fo.company_name = self.request.POST.get('company')
+        fo.save()
+        return super(Sycco_DashboardCreate, self).form_valid(form)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(Sycco_DashboardCreate, self).get_context_data(*args, **kwargs)
+        context['userpro'] = UserProfile.objects.all()
+        #context['userpro'] = UserProfile.objects.all().filter(group="Recycler")
+        #context['userhotel'] = UserProfile.objects.all().filter(group="Hotel")
+        return context
+
+
+class Sycco_DashboardUpdate(UpdateView):
+
+    model = SyccoMaster
+    #form_class = SyccoMasterForm
+    fields = ['weight', 'green_point', 'amount']
+    template_name = 'sycco_management/sycco_dashboardupdate.html'
+    success_url = reverse_lazy('sycco_dashboard')
+
+
+class Sycco_DashboardDelete(DeleteView):
+    model = SyccoMaster
+    success_url = reverse_lazy('sycco_dashboard')
+
 
 
 # class Sycco_DashboardDetail(DetailView): 
@@ -156,7 +211,7 @@ class Sycco_Dashboard(ListView):
 
 
 
-
+#(22/11/2018)
 # class Sycco_DashboardDetail(DetailView): 
 #     model = SyccoMaster
 #     template_name = 'sycco_management/sycco_dashboarddetail.html'
@@ -187,59 +242,26 @@ class Sycco_Dashboard(ListView):
 #         print("context", context)
 #         return context
 
-class Sycco_DashboardDetail(DetailView): 
-    model = SyccoMaster
-    template_name = 'sycco_management/sycco_dashboarddetail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(Sycco_DashboardDetail, self).get_context_data(**kwargs)
-        recuser = self.request.user
-        context['now'] = SyccoHRtable.objects.all().filter(user=recuser)
-        print("context", context)
-        return context
 
 
 
 
-class Sycco_DashboardCreate(CreateView):
 
-    form_class = SyccoMasterForm
-    template_name = 'sycco_management/sycco_dashboardcreate.html'
-    success_url = reverse_lazy('sycco_dashboard')
+# class Sycco_DashboardDetail(DetailView): 
+#     model = SyccoMaster
+#     template_name = 'sycco_management/sycco_dashboarddetail.html'
 
-    def form_valid(self, form):
-        print('qw', str(self.request.user))
-        fo = form.save(commit=False)
-        
-        uss = User.objects.get(username=str(self.request.user))
-        fo.user = uss
-        fo.company_name = self.request.POST.get('company')
-        
-        print(self.request.POST.get('company'))
-
-        fo.save()
-        return super(Sycco_DashboardCreate, self).form_valid(form)
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(Sycco_DashboardCreate, self).get_context_data(*args, **kwargs)
-        context['userpro'] = UserProfile.objects.all()
-        #context['userpro'] = UserProfile.objects.all().filter(group="Recycler")
-        #context['userhotel'] = UserProfile.objects.all().filter(group="Hotel")
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super(Sycco_DashboardDetail, self).get_context_data(**kwargs)
+#         recuser = self.request.user
+#         context['now'] = SyccoHRtable.objects.all().filter(user=recuser)
+#         print("context", context)
+#         return context
 
 
-class Sycco_DashboardUpdate(UpdateView):
-
-    model = SyccoMaster
-    #form_class = SyccoMasterForm
-    fields = ['weight', 'green_point', 'amount']
-    template_name = 'sycco_management/sycco_dashboardupdate.html'
-    success_url = reverse_lazy('sycco_dashboard')
 
 
-class Sycco_DashboardDelete(DeleteView):
-    model = SyccoMaster
-    success_url = reverse_lazy('sycco_dashboard')
+
 
 
 

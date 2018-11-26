@@ -23,8 +23,6 @@ from .tokens import account_activation_token
 from django.core.mail import EmailMessage
 
 
-#test for git
-
 
 #--------Start Home Page-------->
 # def hotel_home(request):
@@ -145,7 +143,7 @@ def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist): 
         user = None
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
@@ -190,11 +188,6 @@ def hotel_dashboard(request):
     }
     return render(request, 'hotel_management/hotel_dashboard.html', context)
 #--------End Hoteldashboard-------->
-
-
-
-
-
 
 
 #--------Start Hoteldashboarddetails-------->
