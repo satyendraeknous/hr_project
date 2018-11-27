@@ -184,7 +184,7 @@
             </div>
             </section> -->
 
-            <div id="card-widgets">
+            <div id="card-widgets"> 
                 <div class="row">
                     <div class="col s12 m6 l12">
                         <ul id="task-card" class="collection with-header">
@@ -209,6 +209,7 @@
                                        <th>Load no</th>
                                        <th>Date and time</th>
                                        <th>Pickup Date</th>
+                                       <th>Hotel Conformation</th>
                                        <th>Contact details</th>
                                        <!-- <th>Remarks</th> -->
                                        <th>Status</th>
@@ -230,6 +231,13 @@
                                        </td>
                                        <td>{{query.date_and_time}}</td>
                                        <td>{{query.pickup_date}}</td>
+
+                                       {% if query.status == "Acknowledge" %}
+                                       <td><a href="{% url 'hotel_dashboardconfupdate' query.pk %}">{{query.hotel_conf}}</a></td>
+                                       {% else %}
+                                       <td><a href="#">{{query.hotel_conf}}</a></td>
+                                       {% endif %}
+
                                        <td>{{query.contact_details}}</td>
                                        <!-- <td>{{query.remarks}}</td> -->
                                        <td>{{query.status}}</td>

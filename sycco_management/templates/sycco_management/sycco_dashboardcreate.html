@@ -45,11 +45,52 @@
                                 <!-- <h4 class="header2">Basic Form</h4> -->
                                 <div class="row">
                                   <form class="col s12" method="POST" action="">{% csrf_token %}
-                                    
+
+
+
+                                      <!-- <div class="row">
+                                          <div class="input-field col s12">
+                                              <input id="id_Select_Group_0" name="Select_Group" value="hotel" type="radio" />   
+                                                  <label for="id_Select_Group_0">Hotel</label>
+                                              
+                                          </div>
+                  
+                                          <div class="input-field col s12">
+                                                  <input id="id_Select_Group_1" name="Select_Group" value="recycler" type="radio" />   
+                                                      <label for="id_Select_Group_1">Recycler</label>
+                                                  </div>
+                                              </div> -->
+
+                                              <!-- <div class="row">
+                                                  <div class="input-field col s12">
+                                                     <p>
+                                                        <label for="id_group">Group:</label>
+                                                        <select style="display:block" name="category" required id="id_group">
+                                                           <option value="" selected disabled hidden></option>
+                                                           {% for categorys in category %}
+                                                           <option value={{categorys.group_id}}>{{categorys.category_name}}</option>
+                                                           {% endfor %}
+                                                        </select>
+                                                     </p>
+                                                  </div>
+                                               </div> -->
+
+
+                                               <div class="row">
+                                                  <div class="input-field col s12">
+                                                      <p>
+                                                          <label for="id_group">Group:</label>
+                                                          <select style="display:block" type="text" name="group" required id="id_group">
+                                                              <option value="" selected disabled hidden></option>
+                                                              <option name=> Hotel</option>
+                                                              <option name=>Recycler</option>
+                                                          </select>
+                                                      </p>
+                                                  </div>
+                                              </div>
+
                                     <div class="row">
                                         <div class="input-field col s12">
-
-                                                
                                             <p>
                                                 <label for="id_company">Company:</label>
                                                 <select style="display:block" type="text" name="company" required id="id_company">

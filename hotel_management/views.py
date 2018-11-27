@@ -41,9 +41,9 @@ def hotel_search(request):
     rform = HotelsearchForm(request.POST or None)
     if request.method == 'POST':
         zip = Zip.objects.filter(zip=request.POST.get('hotel_zip'))
-        print('zip', str(zip))
+        print('zip', str(zip)) 
         if not zip:
-            context = {'frm': rform, }
+            context = {'frm': rform, } 
             messages.error(request, 'Please enter valid zip')
             return render(request, 'hotel_management/hotel_search.html', context)
         else:
@@ -304,7 +304,7 @@ def hotel_dashboardUpdate(request, pk):
     if request.method == "POST":
         form = HoteldashboardcreateForm(data=request.POST, instance=instance)
         
-        if form.is_valid():
+        if form.is_valid(): 
             if ("Processing" in instance.status):
                 instance = form.save(commit=False)
                 instance.user_id = User.objects.get(username=request.user.username)
@@ -392,6 +392,54 @@ def hotel_dashboardUpdate(request, pk):
 #--------End HoteldashboardUpdate-------->
 
 
+#--------Start_Hoteldashboard_Conformation-------->
+@login_required(login_url='/user_login/')
+def hotel_dashboard_conf_update(request, pk):
+    product = Product.objects.all()
+    category = Category.objects.all()
+    instance = get_object_or_404(LoadDashboard, load_no=pk)
+    if request.method == "POST":
+        form = HoteldashboardcreateForm(data=request.POST, instance=instance)
+        
+        if form.is_valid(): 
+            if instance.pickup_date:
+                if ("Acknowledge" in instance.status):
+                    if "NO" in instance.hotel_conf:
+                        instance = form.save(commit=False)
+                        instance.user_id = User.objects.get(username=request.user.username)
+                        instance.hotel_conf = request.POST.get('hotel_conf')
+                        # instance.status = "Close"
+
+                        instance.save()
+                        messages.success(request, "Successfully Conformation Updated")
+                        return HttpResponseRedirect('/hotel_management/hotel_dashboard/')
+                    else:
+                        messages.success(request, 'Sorry! Already Conformed.')
+                        #return HttpResponseRedirect('/hotel_management/hotel_dashboard/')
+                else:
+                    messages.success(request, 'Sorry! Status not Acknowledge.')
+                    #return HttpResponseRedirect('/hotel_management/hotel_dashboard/')
+            else:
+                messages.success(request, 'Sorry! You have not Pickup Date.')
+                return HttpResponseRedirect('/hotel_management/hotel_dashboard/')
+        else:
+            messages.success(request, "Invalid Form")
+    else:
+        form = HoteldashboardcreateForm()
+    context = {'form': form, 'instance': instance, 'product':product, 'category':category, }
+
+    return render(request, 'hotel_management/hotel_dashboardconfupdate.html', context)
+
+#--------End_Hoteldashboard_Conformation-------->
+
+
+
+
+
+
+
+
+
 #--------Start HoteldashboardDelete-------->
 @login_required(login_url='/user_login/')
 def Hotel_dashboardDelete(request, pk):
@@ -443,6 +491,18 @@ def Hotel_dashboardDelete(request, pk):
     #queryset = LoadDashboard.objects.all().order_by('-date_and_time')
     return render(request, 'hotel_management/hotel_dashboard.html', {"queryset": queryset})
 #--------End HoteldashboardDelete-------->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # #--------Start Hoteldashboard-------->

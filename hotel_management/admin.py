@@ -7,15 +7,10 @@ from . models import *
 # Register your models here.
 
 
-
-class UserProfileAdmin(admin.ModelAdmin):
+class UserProfileAdmin(admin.ModelAdmin): 
     model = UserProfile
     list_display = ['user', 'phone_no', 'company',]
 admin.site.register(UserProfile, UserProfileAdmin)
-
-
-
-
 
 
 class CountryAdmin(admin.ModelAdmin):

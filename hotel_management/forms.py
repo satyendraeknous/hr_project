@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 
 
 class HotelsearchForm(forms.ModelForm):
-    class Meta():
-        model = HotelMaster
+    class Meta(): 
+        model = HotelMaster 
         fields = ['hotel_zip']
 
 

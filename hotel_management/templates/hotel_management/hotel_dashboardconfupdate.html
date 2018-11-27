@@ -40,7 +40,7 @@
                         <div class="input-field col s12">
                            <!-- <input id="id_product" type="text" name="product" value={{instance.product}}> -->
                            <!-- <label for="id_product">Product</label> -->
-                           <select style="display:block" name="product" required id="id_product">
+                           <select style="display:block" name="product" required id="id_product" >
                               <option value={{instance.product_id}} selected hidden>{{instance.product}}</option>
                               {% for products in product %}
                               <option value={{products.product_id}}>{{products.product_name}}</option>
@@ -62,27 +62,34 @@
                      </div>
                      <div class="row">
                         <div class="input-field col s12">
-                           <input id="id_contact_details" type="number" name="contact_details" value={{instance.contact_details}}>
+                           <input id="id_contact_details" type="number" name="contact_details" value={{instance.contact_details}} readonly>
                            <label for="id_contact_details">Contact Details</label>
                         </div>
                      </div>
                      <div class="row">
                         <div class="input-field col s12">
-                           <input id="id_no_of_bags" name="no_of_bags" type="number" value={{instance.no_of_bags}} >
+                           <input id="id_no_of_bags" name="no_of_bags" type="number" value={{instance.no_of_bags}} readonly>
                            <label for="id_no_of_bags">No. Of Bags</label>
                         </div>
                     </div>
                         <div class="row">
                            <div class="input-field col s12">
-                              <input id="id_weight" name="weight" type="number" value="{{instance.weight}}" >
+                              <input id="id_weight" name="weight" type="number" value="{{instance.weight}}" readonly>
                               <label for="id_weight">Weight</label>
                            </div>
                         </div>
 
                         <div class="row">
                                 <div class="input-field col s12">
-                                   <input id="id_remarks" name="remarks" type="text" value="{{instance.remarks}}" >
+                                   <input id="id_remarks" name="remarks" type="text" value="{{instance.remarks}}" readonly>
                                    <label for="id_remarks">Remarks</label>
+                                </div>
+                             </div>
+
+                             <div class="row">
+                                <div class="input-field col s12">
+                                   <input id="id_hotel_conf" name="hotel_conf" type="text" value="{{instance.hotel_conf}}">
+                                   <label for="id_hotel_conf">Hotel Conformation</label>
                                 </div>
                              </div>
 
@@ -130,23 +137,20 @@
 
 
 
+
 <!-- <html>
-<head>
-<title>Hotel DashboardUpdate</title>
-</head>
-<body>
-    <h1 align="center" style="color:red">Hotel Dashboard Update Form</h1>
-    <a href="{% url 'user_logout' %}">Logout</a>
-    <br>
-    <br>
+    <head>
+        <title>Hotel Conformation</title>
+    </head>
+    <body>
+        <h1>Hotel Conformation Update</h1>
+        
+            <form method="POST" action="">{% csrf_token %}
 
-    <form method="POST" action="">{% csrf_token %}
-
-        {{form.as_p}}
-
-        <input type="submit" value="Update">
-    </form>
-</body>
+                {{form.as_p}}
+        
+                <input type="submit" value="Update">
+            </form>
+       
+    </body>
 </html> -->
-
-

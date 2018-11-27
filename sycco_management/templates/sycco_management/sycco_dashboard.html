@@ -66,7 +66,7 @@
                           <i class="material-icons background-round mt-5">add_shopping_cart</i>
                           <p>Total Load</p>
                         </div>
-                        <div class="col s5 m5 right-align"> 
+                        <div class="col s5 m5 right-align">  
                           <!-- <h5 class="mb-0">690</h5>
                           <p class="no-margin">New</p> -->
                           <p>{{ total }}</p>
@@ -125,7 +125,7 @@
                   </div>
                 </div>
               </div>
-              <!--End card-box-->
+              <!--End card-box--> 
   
               
               <div id="card-widgets">
@@ -167,7 +167,9 @@
                                           <label for="checkbox1"></label>
                                         </td>
                                         <td> <a href="{% url 'sycco_dashboarddetail' query.pk %}"> {{query.user}}</a></td>
-                                        <td>{{query.company_name}}</td>
+                                        
+                                        <td><a href="{% url 'sycco_dashboarddetailcmpy' query.pk %}">{{query.company_name}}</a></td>
+                                       
                                         <td>{{query.weight}}</td>
                                         <td>{{query.green_point}}</td>
                                         <td>{{query.amount}}</td>
@@ -180,6 +182,7 @@
                                         <td>
                                             <a href="{% url 'sycco_dashboarddelete' pk=query.pk %}" >Delete</a>
                                         </td>
+                                        
                                       </tr>
                                       {% endfor %}
                                     </tbody>

@@ -207,6 +207,9 @@
                              <th>Load no</th>
                              <th>Date and time</th>
                              <th>Pickup Date</th>
+
+                             <th>Hotel Conformation</th>
+
                              <th>Contact details</th>
                              <!-- <th>Remarks</th> -->
                              <th>Status</th>
@@ -215,7 +218,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                            {% for query in now1 %}
+                            {% for query in now1 %} 
                           <tr>
                             <td class="valign-wrapper">
                               <input type="checkbox" class="filled-in checkbox-pink" id="checkbox1" />
@@ -230,6 +233,9 @@
                             <!-- <td>{{query.zip}}</td> -->
                             <td>{{query.date_and_time}}</td>
                             <td>{{query.pickup_date}}</td>
+
+                            <td>{{query.hotel_conf}}</td>
+
                             <td>{{query.contact_details}}</td>
                             <td>{{query.status}}</td>
                             <!-- <td>

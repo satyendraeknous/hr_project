@@ -72,7 +72,7 @@ class Brand(models.Model):
 
 
 class HotelMaster(models.Model): 
-    hotel_id = models.AutoField(primary_key=True)
+    hotel_id = models.AutoField(primary_key=True) 
     hotel_name = models.CharField(max_length=150)
     hotel_address1 = models.CharField(max_length=150)
     hotel_address2 = models.CharField(max_length=150)
@@ -107,6 +107,8 @@ class LoadDashboard(models.Model):
     green_point_hotel = models.PositiveIntegerField(blank=True, null=True)
     green_point_recycler = models.PositiveIntegerField(blank=True, null=True)
     remarks = models.TextField(max_length=524, blank=True, null=True)
+    hotel_conf = models.CharField(max_length=150, default="NO")
+    #hotel_conf = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.load_no)
@@ -115,7 +117,7 @@ class LoadDashboard(models.Model):
 class UserProfile(models.Model): 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_no = models.IntegerField()
-    company = models.CharField(max_length=150)
+    company = models.CharField(max_length=150) 
     group = models.CharField(max_length=50)
     
     def __str__(self):

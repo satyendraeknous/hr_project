@@ -12,8 +12,16 @@ class SyccoProfileForm(forms.ModelForm):
         fields = ('address1', 'address2', 'city', 'zip', 'state', 'country', 'phone_no',)
 
 
-class SyccoMasterForm(forms.ModelForm):
 
+
+# Select_Group = [
+#     ('hotel', 'Hotel'),
+#     ('recycler', 'Recycler'),
+# ]
+
+class SyccoMasterForm(forms.ModelForm):
+    #Select_Group = forms.ChoiceField(required=True, widget=forms.RadioSelect( attrs={'class': 'Radio'}), choices= Select_Group)
     class Meta:
         model = SyccoMaster
         fields = ('weight', 'green_point', 'amount',)
+        #fields = ('weight', 'green_point', 'amount', 'Select_Group',)

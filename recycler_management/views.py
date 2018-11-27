@@ -10,6 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.urls import reverse
 
 # Create your views here.
 
@@ -145,7 +146,6 @@ class Recycler_Dashboardgreendetail(DetailView):
 #--------End Dashboard Detail for greenpoint-------->
 
 
-
 #--------Start recycler dashboard Update-------->
 @method_decorator(login_required, name='dispatch') 
 class RecyclerUpdateView(UpdateView):
@@ -170,8 +170,9 @@ class RecyclerUpdateView(UpdateView):
         form.instance.person_id = self.kwargs.get('pk')
         #print('form.status', form)
         a = form.cleaned_data['status']
+        #b = form.cleaned_data['hotel_conf']
 
-        if a == "Processing":
+        if a == "Processing" :
             a = "Acknowledge"
 
             instance = form.save(commit=False)
@@ -179,10 +180,8 @@ class RecyclerUpdateView(UpdateView):
             instance.save()
             messages.success(self.request, "Successfully Updated")
 
-        elif a == "Acknowledge":
-            #print('acknowldege', a)
+        elif a == "Acknowledge" and "Yes" in instance.hotel_conf:
             a = "Close"
-            #print('a', a)
             instance = form.save(commit=False)
             instance.status = a
             
@@ -228,11 +227,113 @@ class RecyclerUpdateView(UpdateView):
                     remark_comment = remark_tbl(user=self.request.user, load_remark=LoadDashboard.objects.get(load_no=instance.load_no), comment=remark2 )
                     remark_comment.save()
             instance.save()
+            
             messages.success(self.request, "Successfully Updated")
+            #return HttpResponseRedirect('/recycler_management/recycler_dashboard/')
         else:
-            messages.success(self.request, "Already Acknowledge")
+            messages.success(self.request, "Not Conformed")
         return HttpResponseRedirect('/recycler_management/recycler_dashboard/') 
 #--------End recycler dashboard Update-------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+#27/11/2018
+# #--------Start recycler dashboard Update-------->
+# @method_decorator(login_required, name='dispatch') 
+# class RecyclerUpdateView(UpdateView):
+#     model = LoadDashboard
+#     #form_class = RecyclerDashboardForm 
+#     fields = []
+#     template_name = 'recycler_management/recycler_dashboardupdate.html'
+#     success_url = 'recycler_management/recycler_dashboar.html'
+    
+#     def get_object(self, pk=None):
+#         ldobj = LoadDashboard.objects.get(pk=self.kwargs['pk'])
+#         if ldobj.status == "Processing":
+#             self.fields = ['load_no', 'no_of_bags', 'weight', 'pickup_date', 'status',]
+#         elif ldobj.status == "Acknowledge":
+#             self.fields = ['load_no', 'no_of_bags', 'weight', 'actual_no_of_bags', 'actual_weight', 'status',]
+#         return self.model.objects.get(pk=self.kwargs['pk'])
+
+
+#     def form_valid(self, form):
+
+#         instance = self.model.objects.get(pk=self.kwargs['pk'])
+#         form.instance.person_id = self.kwargs.get('pk')
+#         #print('form.status', form)
+#         a = form.cleaned_data['status']
+#         #b = form.cleaned_data['hotel_conf']
+
+#         if a == "Processing":
+#             a = "Acknowledge"
+
+#             instance = form.save(commit=False)
+#             instance.status = a
+#             instance.save()
+#             messages.success(self.request, "Successfully Updated")
+
+#         elif a == "Acknowledge":
+#             a = "Close"
+#             instance = form.save(commit=False)
+#             instance.status = a
+            
+#             #----Start Sycco Green Point---->
+#             actweight = instance.actual_weight
+
+#             x = User.objects.get(username=self.request.user)
+
+#             y = UserProfile.objects.get(user=self.request.user)
+#             sycomster = SyccoMaster.objects.get(company_name=y.company)
+            
+#             sycgrnpt = ""
+#             syctotlgrnpt = 0
+#             sycamount = ""
+#             syctotalamount = 0
+
+#             sycamount = sycomster.amount
+#             sycgrnpt = sycomster.green_point
+
+#             if sycomster.total_amount:
+#                 syctotalamount = sycomster.total_amount
+
+#             if sycomster.total_greenpoint:
+#                 syctotlgrnpt = sycomster.total_greenpoint
+
+#             scytotlgptupdate = int(actweight)*sycgrnpt
+
+#             syctotlamtupdate = int(scytotlgptupdate)*sycamount/sycgrnpt
+
+#             sycomster.total_greenpoint = syctotlgrnpt+scytotlgptupdate
+#             sycomster.total_amount = syctotalamount+syctotlamtupdate
+#             sycomster.save()
+#             #----End Sycco Green Point---->
+
+#             #----Update Recycler GreenPoint in LoadDashboard table---->
+#             instance.green_point_recycler = scytotlgptupdate
+
+#             #----Remark table create---->
+#             remark_tbl = Remark
+#             if self.request.method == 'POST':
+#                 remark2 = self.request.POST.get('remarks')
+#                 if remark2:
+#                     remark_comment = remark_tbl(user=self.request.user, load_remark=LoadDashboard.objects.get(load_no=instance.load_no), comment=remark2 )
+#                     remark_comment.save()
+#             instance.save()
+#             messages.success(self.request, "Successfully Updated")
+#         else:
+#             messages.success(self.request, "Already Acknowledge")
+#         return HttpResponseRedirect('/recycler_management/recycler_dashboard/') 
+# #--------End recycler dashboard Update-------->
 
 
 

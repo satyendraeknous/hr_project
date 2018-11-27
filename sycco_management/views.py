@@ -13,10 +13,10 @@ from hotel_recycler_management.forms import *
 from . forms import SyccoProfileForm, SyccoMasterForm
 from . models import *
 from hotel_management .models import UserProfile
-from recycler_management .models import *
+from recycler_management .models import * 
 
 
-#----for Email verify---->
+#----for Email verify----> 
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -103,7 +103,7 @@ class Sycco_Dashboard(ListView):
 class Sycco_DashboardDetail(DetailView): 
     model = SyccoMaster
     template_name = 'sycco_management/sycco_dashboarddetail.html'
-
+    
     def get_context_data(self, *args, **kwargs):
         context = super(Sycco_DashboardDetail, self).get_context_data(*args, **kwargs)
         idd = self.kwargs.get('pk')
@@ -115,8 +115,25 @@ class Sycco_DashboardDetail(DetailView):
         return context
 
 
+class Sycco_DashboardDetail_Cmpny(DetailView): 
+    model = SyccoMaster
+    template_name = 'sycco_management/sycco_dashboarddetail.html'
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super(Sycco_DashboardDetail_Cmpny, self).get_context_data(*args, **kwargs)
+        idd = self.kwargs.get('pk')
 
-class Sycco_DashboardCreate(CreateView):
+        instance = get_object_or_404(SyccoMaster, pk=idd)
+
+        h_name = HotelMaster.objects.get(hotel_name=instance.company_name)
+        recyObj = RecyclerMaster.objects.get(recycler_zip=h_name.hotel_zip)
+        c_sycco = SyccoMaster.objects.get(company_name=recyObj.recycler_name)
+
+        context['now'] = c_sycco
+        return context
+    
+
+class Sycco_DashboardCreate(CreateView): 
 
     form_class = SyccoMasterForm
     template_name = 'sycco_management/sycco_dashboardcreate.html'
@@ -128,6 +145,9 @@ class Sycco_DashboardCreate(CreateView):
         uss = User.objects.get(username=str(self.request.user))
         fo.user = uss
         fo.company_name = self.request.POST.get('company')
+        aagroup = self.request.POST.get('group')
+        print('aagroup', aagroup)
+
         fo.save()
         return super(Sycco_DashboardCreate, self).form_valid(form)
 

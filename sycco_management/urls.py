@@ -19,6 +19,9 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/sycco_dashboarddetail/$',
         Sycco_DashboardDetail.as_view(), name='sycco_dashboarddetail'),
 
+    url(r'^(?P<pk>\d+)/sycco_dashboarddetailcmpy/$',
+        Sycco_DashboardDetail_Cmpny.as_view(), name='sycco_dashboarddetailcmpy'),
+
     url(r'^(?P<pk>\d+)/sycco_dashboarddelete/$',
         Sycco_DashboardDelete.as_view(), name='sycco_dashboarddelete'),
     
