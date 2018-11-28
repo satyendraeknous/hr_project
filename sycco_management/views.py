@@ -100,6 +100,7 @@ class Sycco_Dashboard(ListView):
     #     return context
 
 
+#28/11/2018
 @method_decorator(login_required, name='dispatch')
 class Sycco_DashboardDetail(DetailView): 
     model = SyccoMaster
