@@ -100,6 +100,7 @@ class Sycco_Dashboard(ListView):
     #     return context
 
 
+@method_decorator(login_required, name='dispatch')
 class Sycco_DashboardDetail(DetailView): 
     model = SyccoMaster
     template_name = 'sycco_management/sycco_dashboarddetail.html'

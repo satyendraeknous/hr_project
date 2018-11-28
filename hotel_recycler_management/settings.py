@@ -26,15 +26,15 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 #--------Start Send Email On Lockahost-------->
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #--------End Send Email On Lockahost-------->
 
 #--------Start Send Email On Server-------->
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'example@eknous.com'
-# EMAIL_HOST_PASSWORD = 'xxxxxx'
-# EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'satyendr@eknous.com'
+EMAIL_HOST_PASSWORD = 'rajat@1993'
+EMAIL_PORT = 587
 #--------End Send Email On Server-------->
 
 # Application definition
