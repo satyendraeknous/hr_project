@@ -74,7 +74,7 @@ admin.site.register(HotelMaster, HotelMasterAdmin)
 class LoadDashboardAdmin(admin.ModelAdmin):
     model = LoadDashboard
     list_display = ['load_no', 'hotel_id', 'user_id',  'date_and_time', 
-                    'contact_details', 'product', 'category', 'no_of_bags', 'weight', 'status',  'pickup_date',
+                    'contact_details', 'hotel_conf', 'product', 'category', 'no_of_bags', 'weight', 'status',  'pickup_date',
                      'actual_no_of_bags', 'actual_weight', 'green_point_hotel', 'green_point_recycler', 'remarks',]
 
 admin.site.register(LoadDashboard, LoadDashboardAdmin)

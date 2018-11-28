@@ -134,7 +134,6 @@ class Sycco_DashboardDetail_Cmpny(DetailView):
     
 
 class Sycco_DashboardCreate(CreateView): 
-
     form_class = SyccoMasterForm
     template_name = 'sycco_management/sycco_dashboardcreate.html'
     success_url = reverse_lazy('sycco_dashboard')
@@ -171,6 +170,47 @@ class Sycco_DashboardUpdate(UpdateView):
 class Sycco_DashboardDelete(DeleteView):
     model = SyccoMaster
     success_url = reverse_lazy('sycco_dashboard')
+
+
+
+#--------Start SyccoProfile Registration -------->
+# def sycco_registration(request):
+
+#     if request.method == 'POST':
+#         user_form = UserForm(data=request.POST,)
+#         sycco_form = SyccoProfileForm(data=request.POST)
+
+#         if user_form.is_valid() and sycco_form.is_valid():
+#             user = user_form.save(commit=False)
+#             user.set_password(user.password)
+#             user.is_active = True
+#             user.save()
+
+#             syccoprof = sycco_form.save(commit=False)
+#             syccoprof.user = user
+#             syccoprof.save()
+#             #print syccoprof
+#             # asd = UserProfile(user=user, phone_no=recycler.recycler_phone_no, company=recycler.recycler_name)
+#             # #print('asd', asd)
+#             # asd.save()
+#             return redirect('/')
+#         else:
+#             return HttpResponse('Invalid registered.')
+#     else:
+#         user_form = UserForm()
+#         sycco_form = SyccoProfileForm()
+#     context = {'user_form': user_form, 'sycco_form': sycco_form, }
+#     return render(request, 'mvppage/sycco_registration.html', context)
+#--------End SyccoProfile Registration-------->
+
+
+
+
+
+
+
+
+
 
 
 
@@ -296,34 +336,40 @@ class Sycco_DashboardDelete(DeleteView):
 
 
 
-#--------Start SyccoProfile Registration -------->
-# def sycco_registration(request):
-
-#     if request.method == 'POST':
-#         user_form = UserForm(data=request.POST,)
-#         sycco_form = SyccoProfileForm(data=request.POST)
-
-#         if user_form.is_valid() and sycco_form.is_valid():
-#             user = user_form.save(commit=False)
-#             user.set_password(user.password)
-#             user.is_active = True
-#             user.save()
-
-#             syccoprof = sycco_form.save(commit=False)
-#             syccoprof.user = user
-#             syccoprof.save()
-#             #print syccoprof
-#             # asd = UserProfile(user=user, phone_no=recycler.recycler_phone_no, company=recycler.recycler_name)
-#             # #print('asd', asd)
-#             # asd.save()
-#             return redirect('/')
-#         else:
-#             return HttpResponse('Invalid registered.')
-#     else:
-#         user_form = UserForm()
-#         sycco_form = SyccoProfileForm()
-#     context = {'user_form': user_form, 'sycco_form': sycco_form, }
-#     return render(request, 'mvppage/sycco_registration.html', context)
-#--------End SyccoProfile Registration-------->
 
 
+
+#28/11/2018
+# class Sycco_DashboardDetail(DetailView): 
+#     model = SyccoMaster
+#     template_name = 'sycco_management/sycco_dashboarddetail.html'
+    
+#     def get_context_data(self, *args, **kwargs):
+#         context = super(Sycco_DashboardDetail, self).get_context_data(*args, **kwargs)
+#         idd = self.kwargs.get('pk')
+#         ######
+#         rec = SyccoMaster.objects.all().filter(id=idd)
+#         print('##########', rec)
+#         for i in rec:
+#             co = i.company_name
+#             print('@@@@@@@@', co)
+#         # context['rec'] = rec
+#             if co.hotel == True:
+#                 h_name = HotelMaster.objects.get(hotel_name=co)
+#                 print('h_nmaeeeeeeeeeeeeeeeeee', h_name)
+#                 recyObj = RecyclerMaster.objects.get(recycler_zip=h_name.hotel_zip)
+#                 print('recyobj',recyObj)
+#                 c_sycco = SyccoMaster.objects.get(company_name=recyObj.recycler_name)
+#                 print('c_sycco',c_sycco)
+#                 context['now'] = c_sycco
+#             if co.rec == True:
+#                 context['rec'] = rec
+#         print(context)
+#         ######
+#         # instance = get_object_or_404(SyccoMaster, pk=idd)
+#         # h_name = HotelMaster.objects.get(hotel_name=instance.company_name)
+#         # recyObj = RecyclerMaster.objects.get(recycler_zip=h_name.hotel_zip)
+#         # c_sycco = SyccoMaster.objects.get(company_name=recyObj.recycler_name)
+#         # context['now'] = c_sycco
+        
+#         return context
